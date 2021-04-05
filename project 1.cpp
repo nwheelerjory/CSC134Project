@@ -28,11 +28,32 @@ int main() {
 	cout << "\n\n\nEnter GPU clock speed in Megahertz: ";
 	cin >> gpuclkspeed;
 	
+	while (gpuclkspeed < 800 || gpuclkspeed > 2000) {
+		
+		cout << "\nError. GPU clock speed cannot be less than 800 Mhz or greater than 2000 Mhz.\nPlease re-enter GPU clock speed: ";
+		cin >> gpuclkspeed;
+		
+	}
+	
 	cout << "Enter CPU clock speed in Megahertz: ";
 	cin >> cpuclkspeed;
 	
+	while (cpuclkspeed < 1000 || cpuclkspeed > 5500) {
+		
+		cout << "\nError. CPU clock speed must cannot be less than 1000Mhz or greater than 5500 Mhz.\nPlease re-enter CPU clock speed: ";
+		cin >> cpuclkspeed;
+		
+	}
+	
 	cout << "Enter number of processor cores: ";
 	cin >> cores;
+	
+	while (cores < 1 || cores > 16) {
+		
+		cout << "\nError. Number of cores cannot be less than 1 or greater than 16.\nPlease re-enter number of cores: ";
+		cin >> cores;
+		
+	}
 	
 	cout << "\nSelect monitor resolution:\n";
 	cout << "1. 1280 x 720\n";
@@ -40,6 +61,18 @@ int main() {
 	cout << "3. 2560 x 1440\n";
 	cout << "4. 3840 x 2160\n";
 	cin >> res;
+	
+	while (res < 1 || res > 4) {
+		
+		cout << "\nError. Resolution selected must be one of the resoltuions displayed in the menu.\nPlease re-select: ";
+		cout << "\n\nSelect monitor resolution:\n";
+		cout << "1. 1280 x 720\n";
+		cout << "2. 1920 x 1080\n";
+		cout << "3. 2560 x 1440\n";
+		cout << "4. 3840 x 2160\n";
+		cin >> res;
+		
+	}
 	
 	//If statement conating the main arithmetic for the program used to determine performance score.
 	if (res == 1) {
