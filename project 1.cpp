@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 	
 	//Declare all variables.
-	double gpuclkspeed = 0, cpuclkspeed = 0, cores = 0, perfscore = 0;
+	double gpuclkspeed = 0, cpuclkspeed = 0, cores = 0, perfscore = 0, highscore = 0, lowscore = 0;
 	int res = 0, compCount = 0, count = 0;
 	string resolution, quality, title = "Computer Hardware Graphics Quality Recommendation Tool";
 	
@@ -155,7 +155,37 @@ int main() {
 	cout << "\nPerformance Score: " << perfscore;
 	cout << "\nRecommended Graphics Qaulity: " << quality;
 	
+	if(highscore<perfscore) {
+	
+        highscore=perfscore;
+        
 	}
+	
+    if(perfscore<lowscore) {
+	
+        lowscore=perfscore;
+        
+	}
+	
+    if(count==0) {
+    	
+        lowscore=perfscore;
+        
+	}
+	
+	perfscore=0;
+	
+	}
+	
+	cout << "The highest performance score was: " << highscore << endl;
+	cout << "The lowest performance score was: " << lowscore << endl;
+	
+	
+
+	
+	
+	
+
 	
 	return 0;	
 }
