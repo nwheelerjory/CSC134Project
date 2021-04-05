@@ -8,11 +8,24 @@ int main() {
 	
 	//Declare all variables.
 	double gpuclkspeed = 0, cpuclkspeed = 0, cores = 0, perfscore = 0;
-	int res = 0;
+	int res = 0, compCount = 0, count = 0;
 	string resolution, quality, title = "Computer Hardware Graphics Quality Recommendation Tool";
 	
+	cout << "Please enter number of computers to be tested: ";
+	cin >> compCount;
+	
+	while (compCount < 0) {
+		
+		cout << "\nNumber of computers to be tested must be greater than 0.\nPlease Re-enter number of computers to be tested: ";
+		cin >> compCount;
+	}
+	
+	cout << "\n\n" << title;
+	
+	for (count = 0; count < compCount; count++) {
+	
 	//Collect user input
-	cout << "Enter GPU clock speed in Megahertz: ";
+	cout << "\n\n\nEnter GPU clock speed in Megahertz: ";
 	cin >> gpuclkspeed;
 	
 	cout << "Enter CPU clock speed in Megahertz: ";
@@ -101,7 +114,6 @@ int main() {
 	}
 	
 	//Program output
-	cout <<"\n\n" << title;
 	cout << "\n\nGPU clock speed: " << gpuclkspeed << "MHz\n";
 	cout << "CPU clock speed: " << cpuclkspeed << "MHz\n";
 	cout << "Number of cores: " << cores;
@@ -109,6 +121,8 @@ int main() {
 	cout << setprecision(2) << fixed << showpoint;
 	cout << "\nPerformance Score: " << perfscore;
 	cout << "\nRecommended Graphics Qaulity: " << quality;
+	
+	}
 	
 	return 0;	
 }
