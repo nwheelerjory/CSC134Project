@@ -11,7 +11,6 @@ string getRecommendedQuality(double);
 void displayInformation(string, double, string, int, double, double);
 
 int main() {
-	
 	double gpuclkspeed = 0.0, cpuclkspeed = 0.0, perfscore = 0.0, highscore = 0.0, lowscore = 0.0, multiplierValue = 0.0;
 	int res = 0, compCount = 0, count = 0, cores = 0;
 	string resolution, quality;
@@ -67,10 +66,33 @@ int main() {
 	quality = getRecommendedQuality(perfscore);
 	displayInformation(quality, perfscore, resolution, cores, cpuclkspeed, gpuclkspeed);
 	
+	if(highscore < perfscore) {
+	
+        highscore = perfscore;
+        
+	}
+	
+    if(perfscore < lowscore) {
+	
+        lowscore = perfscore;
+        
+	}
+	
+    if(count == 0) {
+    	
+        lowscore = perfscore;
+        
+	}
+	
+	perfscore = 0;
+	
+	}
+	
+	cout << "\nThe highest performance score was: " << highscore << endl;
+	cout << "The lowest performance score was: " << lowscore << endl;
+	
 }
 
-
-}
 void displayTitle() {
 	
 	string title = "\nComputer Hardware Graphics Quality Recommendation Tool\n";
@@ -135,7 +157,7 @@ string getResolutionString() {
 	
 	return resolution;
 	
-}
+}	
 
 double getMultiplierValue(string resolution) {
 		
