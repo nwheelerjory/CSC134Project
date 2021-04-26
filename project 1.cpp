@@ -8,6 +8,7 @@ string getResolutionString();
 double getMultiplierValue(string);
 double calculatePerformanceScore(double, double, double, int);
 string getRecommendedQuality(double);
+void displayInformation(string, double, string, int, double, double);
 
 int main() {
 	
@@ -64,6 +65,7 @@ int main() {
 	multiplierValue = getMultiplierValue(resolution);
 	perfscore = calculatePerformanceScore(multiplierValue, gpuclkspeed,cpuclkspeed,cores);
 	quality = getRecommendedQuality(perfscore);
+	displayInformation(quality, perfscore, resolution, cores, cpuclkspeed, gpuclkspeed);
 	
 }
 
@@ -226,3 +228,15 @@ string getRecommendedQuality(double perfScore) {
 	return quality;
 	
 }
+
+void displayInformation(string quality, double perfscore, string resolution, int cores, double cpuclkspeed, double gpuclkspeed) {
+
+	cout << "\n\nGPU clock speed: " << gpuclkspeed << "MHz\n";
+	cout << "CPU clock speed: " << cpuclkspeed << "MHz\n";
+	cout << "Number of cores: " << cores;
+	cout << "\nMonitor Resolution: " << resolution;
+	cout << setprecision(2) << fixed << showpoint;
+	cout << "\nPerformance Score: " << perfscore;
+	cout << "\nRecommended Graphics Qaulity: " << quality;
+	
+	}
