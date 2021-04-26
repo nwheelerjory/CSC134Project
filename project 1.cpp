@@ -7,6 +7,7 @@ void displayTitle();
 string getResolutionString();
 double getMultiplierValue(string);
 double calculatePerformanceScore(double, double, double, int);
+string getRecommendedQuality(double);
 
 int main() {
 	
@@ -62,6 +63,7 @@ int main() {
 	resolution = getResolutionString();
 	multiplierValue = getMultiplierValue(resolution);
 	perfscore = calculatePerformanceScore(multiplierValue, gpuclkspeed,cpuclkspeed,cores);
+	quality = getRecommendedQuality(perfscore);
 	
 }
 
@@ -181,4 +183,46 @@ double calculatePerformanceScore(double multiplierValue, double gpuclkspeed, dou
 	
 }
 
-
+string getRecommendedQuality(double perfScore) {
+	
+	string quality;
+	
+	if (perfScore <= 11000) {
+		
+		quality = "Unplayable\n";
+		
+	}
+	
+	else if (perfScore > 11000 && perfScore <= 13000) {
+		
+		quality = "Low\n";
+		
+	}
+	
+	else if (perfScore > 13000 && perfScore <= 15000) {
+		
+		quality = "Medium\n";
+		
+	}
+	
+	else if (perfScore > 15000 && perfScore <= 17000) {
+		
+		quality = "High\n";
+		
+	}
+	
+	else if (perfScore > 17000){
+		
+		quality = "Ultra\n";
+		
+	}
+	
+	else{
+		
+		cout << "Error";
+		
+	}
+	
+	return quality;
+	
+}
