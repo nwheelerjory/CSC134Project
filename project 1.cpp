@@ -5,7 +5,7 @@ using namespace std;
 
 void displayTitle();
 string getResolutionString();
-
+double getMultiplierValue(string);
 
 int main() {
 	
@@ -59,6 +59,7 @@ int main() {
 	}
 	
 	resolution = getResolutionString();
+	multiplierValue = getMultiplierValue(resolution);
 	
 }
 
@@ -129,4 +130,43 @@ string getResolutionString() {
 	return resolution;
 	
 }
+
+double getMultiplierValue(string resolution) {
+		
+		double multiplier; 
+		
+	if (resolution == "1280 x 720") {
+		
+		multiplier =  1.00;
+		
+	}
+	
+	else if (resolution == "1920 x 1080") {
+		
+		multiplier = .75;
+		
+	}
+	
+	else if (resolution == "2560 x 1440") {
+		
+		multiplier = .55;
+		
+	}
+	
+	else if (resolution == "3840 x 2160") {
+		
+		multiplier = .35;
+		
+	}
+	
+	else{
+		
+		cout << "Error\n";
+		
+	}
+	
+	return multiplier; 
+	
+}
+
 
