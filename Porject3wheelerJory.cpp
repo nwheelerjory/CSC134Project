@@ -4,9 +4,13 @@
 using namespace std;
 
 void displayTitle();
+string getResolutionString();
+double getMultiplierValue(string);
+double calculatePerformanceScore(double, double, double, int);
+string getRecommendedQuality(double);
+void displayInformation(string, double, string, int, double, double);
 
 int main() {
-	
 	double gpuclkspeed = 0.0, cpuclkspeed = 0.0, perfscore = 0.0, highscore = 0.0, lowscore = 0.0, multiplierValue = 0.0;
 	int res = 0, compCount = 0, count = 0, cores = 0;
 	string resolution, quality;
@@ -56,10 +60,39 @@ int main() {
 		
 	}
 	
+	resolution = getResolutionString();
+	multiplierValue = getMultiplierValue(resolution);
+	perfscore = calculatePerformanceScore(multiplierValue, gpuclkspeed,cpuclkspeed,cores);
+	quality = getRecommendedQuality(perfscore);
+	displayInformation(quality, perfscore, resolution, cores, cpuclkspeed, gpuclkspeed);
+	
+	if(highscore < perfscore) {
+	
+        highscore = perfscore;
+        
+	}
+	
+    if(perfscore < lowscore) {
+	
+        lowscore = perfscore;
+        
+	}
+	
+    if(count == 0) {
+    	
+        lowscore = perfscore;
+        
+	}
+	
+	perfscore = 0;
+	
+	}
+	
+	cout << "\nThe highest performance score was: " << highscore << endl;
+	cout << "The lowest performance score was: " << lowscore << endl;
+	
 }
 
-
-}
 void displayTitle() {
 	
 	string title = "\nComputer Hardware Graphics Quality Recommendation Tool\n";
@@ -67,3 +100,165 @@ void displayTitle() {
 	cout << title;
 	
 }
+
+string getResolutionString() {
+	
+	int res;
+	string resolution;
+	
+	cout << "\nSelect monitor resolution:\n";
+	cout << "\t1. 1280 x 720\n";
+	cout << "\t2. 1920 x 1080\n";
+	cout << "\t3. 2560 x 1440\n";
+	cout << "\t4. 3840 x 2160\n";
+	cin >> res;
+	
+	while (res < 1 || res > 4) {
+		
+		cout << "\nError. Resolution selected must be one of the resoltuions displayed in the menu.\nPlease re-select: ";
+		cout << "\n\nSelect monitor resolution:\n";
+		cout << "\t1. 1280 x 720\n";
+		cout << "\t2. 1920 x 1080\n";
+		cout << "\t3. 2560 x 1440\n";
+		cout << "\t4. 3840 x 2160\n";
+		cin >> res;
+		
+	}
+	
+	if (res == 1) {
+		
+		resolution = "1280 x 720";
+		
+	}
+	
+	else if (res == 2) {
+		
+		resolution = "1920 x 1080";
+		
+	}
+	
+	else if (res == 3) {
+		
+		resolution = "2560 x 1440";
+		
+	}
+	
+	else if (res == 4) {
+		
+		resolution = "3840 x 2160";
+		
+	}
+	
+	else{
+		
+		cout << "Error\n";
+		
+	}
+	
+	return resolution;
+	
+}	
+
+double getMultiplierValue(string resolution) {
+		
+		double multiplier; 
+		
+	if (resolution == "1280 x 720") {
+		
+		multiplier =  1.00;
+		
+	}
+	
+	else if (resolution == "1920 x 1080") {
+		
+		multiplier = .75;
+		
+	}
+	
+	else if (resolution == "2560 x 1440") {
+		
+		multiplier = .55;
+		
+	}
+	
+	else if (resolution == "3840 x 2160") {
+		
+		multiplier = .35;
+		
+	}
+	
+	else{
+		
+		cout << "Error\n";
+		
+	}
+	
+	return multiplier; 
+	
+}
+
+double calculatePerformanceScore(double multiplierValue, double gpuclkspeed, double cpuclkspeed, int cores) {
+	
+	double perfscore;
+	
+	perfscore = ((5.0 * gpuclkspeed) + (cores * cpuclkspeed)) * multiplierValue;
+	
+	return perfscore;
+	
+}
+
+string getRecommendedQuality(double perfScore) {
+	
+	string quality;
+	
+	if (perfScore <= 11000) {
+		
+		quality = "Unplayable\n";
+		
+	}
+	
+	else if (perfScore > 11000 && perfScore <= 13000) {
+		
+		quality = "Low\n";
+		
+	}
+	
+	else if (perfScore > 13000 && perfScore <= 15000) {
+		
+		quality = "Medium\n";
+		
+	}
+	
+	else if (perfScore > 15000 && perfScore <= 17000) {
+		
+		quality = "High\n";
+		
+	}
+	
+	else if (perfScore > 17000){
+		
+		quality = "Ultra\n";
+		
+	}
+	
+	else{
+		
+		cout << "Error";
+		
+	}
+	
+	return quality;
+	
+}
+
+void displayInformation(string quality, double perfscore, string resolution, int cores, double cpuclkspeed, double gpuclkspeed) {
+
+	cout << "\n\nGPU clock speed: " << gpuclkspeed << "MHz\n";
+	cout << "CPU clock speed: " << cpuclkspeed << "MHz\n";
+	cout << "Number of cores: " << cores;
+	cout << "\nMonitor Resolution: " << resolution;
+	cout << setprecision(2) << fixed << showpoint;
+	cout << "\nPerformance Score: " << perfscore;
+	cout << "\nRecommended Graphics Qaulity: " << quality;
+	
+	}
