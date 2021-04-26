@@ -6,6 +6,7 @@ using namespace std;
 void displayTitle();
 string getResolutionString();
 double getMultiplierValue(string);
+double calculatePerformanceScore(double, double, double, int);
 
 int main() {
 	
@@ -60,6 +61,7 @@ int main() {
 	
 	resolution = getResolutionString();
 	multiplierValue = getMultiplierValue(resolution);
+	perfscore = calculatePerformanceScore(multiplierValue, gpuclkspeed,cpuclkspeed,cores);
 	
 }
 
@@ -166,6 +168,16 @@ double getMultiplierValue(string resolution) {
 	}
 	
 	return multiplier; 
+	
+}
+
+double calculatePerformanceScore(double multiplierValue, double gpuclkspeed, double cpuclkspeed, int cores) {
+	
+	double perfscore;
+	
+	perfscore = ((5.0 * gpuclkspeed) + (cores * cpuclkspeed)) * multiplierValue;
+	
+	return perfscore;
 	
 }
 
